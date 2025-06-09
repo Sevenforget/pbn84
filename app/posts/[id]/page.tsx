@@ -1,5 +1,4 @@
 import { fetchPostFromApi } from "@/lib/api-service";
-import { getCurrentProjectDomain } from "@/lib/domain-mapper";
 import { formatDate } from "@/lib/utils";
 import { ArrowLeft, Calendar, Tag, User } from "lucide-react";
 import Link from "next/link";
@@ -10,7 +9,8 @@ export default async function PostPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const postId = Number.parseInt(params.id);
+  const { id } = await params;
+  const postId = Number.parseInt(id);
 
   if (isNaN(postId) || postId < 0) {
     notFound();
